@@ -19,7 +19,7 @@ function initMap(): void {
     }
   );
 
-  map.data.loadGeoJson('https://test-data-maps.s3.ap-south-1.amazonaws.com/Test_NE_Map-_Untitled_layer.geojson');
+  map.data.loadGeoJson('assets/json/Test_NE_Map-_Untitled_layer.geojson');
 
   map.data.setStyle({
     fillColor: 'green',

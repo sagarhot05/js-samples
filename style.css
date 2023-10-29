@@ -9,6 +9,7 @@
  */
 #map {
   height: 100%;
+  width: 50%;
 }
 
 /* 
@@ -37,3 +38,56 @@ body {
   background: rgb(235, 235, 235);
 }
 
+.header {
+  height: auto;
+}
+
+hr {
+  border: 1px solid #E6E6E6;
+}
+
+.lg {
+  padding-left: 32px;
+}
+
+.container {
+  /* padding-left: 32px;
+  padding-right: 32px; */
+  margin-top: 10px;
+}
+
+.section-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-head {
+  width: 50%;
+}
+
+.flexbox-container {
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+
+.flexbox-container #left_container {
+  flex: 1;
+  padding: 0 5px;
+}
+
+.container-content {
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.flexbox-container #map_container {
+  margin-right: 0px;
+}
+
+#map {
+  flex: 2;
+}
