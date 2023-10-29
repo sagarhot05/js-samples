@@ -9,8 +9,8 @@ function initMap(): void {
     document.getElementById("map") as HTMLElement,
     {
       center: {
-        lat: 37.7893719,
-        lng: -122.3942,
+        lat: 18.4545818,
+        lng: 73.9197943,
       },
       zoom: 16,
       heading: 320,
@@ -18,6 +18,24 @@ function initMap(): void {
       mapId: "90f87356969d889c",
     }
   );
+
+  map.data.loadGeoJson('https://test-data-maps.s3.ap-south-1.amazonaws.com/Test_NE_Map-_Untitled_layer.geojson');
+
+  map.data.setStyle({
+    fillColor: 'green',
+    strokeWeight: 1
+  });
+
+  var infowindow = new google.maps.InfoWindow();
+            
+  map.data.addListener('click', function(event) {
+    let state = event.feature.getProperty("name");
+    let html = state; // combine state name with a label
+    infowindow.setContent(html); // show the html variable in the infowindow
+    infowindow.setPosition(event.latLng); // anchor the infowindow at the marker
+    infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)}); // move the infowindow up slightly to the top of the marker icon
+    infowindow.open(map);
+  });
 
   const buttons: [string, string, number, google.maps.ControlPosition][] = [
     ["Rotate Left", "rotate", 20, google.maps.ControlPosition.LEFT_CENTER],
