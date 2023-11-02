@@ -69,6 +69,19 @@ function initMap(): void {
         break;
     }
   };
+
+  document.getElementById('view')?.addEventListener('change', function(event) {
+    const target = event.target as HTMLSelectElement;
+    if (target.value == "pv") {
+      map.setZoom(18);
+    } else if (target.value == "tv") {
+      map.setZoom(20);
+    } else {
+      map.setZoom(16);
+      console.log(target.value);
+    }
+  })
+
 }
 
 declare global {
@@ -78,3 +91,4 @@ declare global {
 }
 window.initMap = initMap;
 export {};
+
