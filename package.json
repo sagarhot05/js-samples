@@ -27,9 +27,12 @@
   },
   "devDependencies": {
     "@types/google.maps": "^3.53.5",
+    "@types/jquery": "^3.5.25",
     "typescript": "^5.2.2",
     "vite": "^4.4.9"
   },
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "leaflet": "^1.9.4"
+  }
 }

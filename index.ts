@@ -19,7 +19,47 @@ function initMap(): void {
     }
   );
 
+  // const map = L.map('map').setView([18.4545818, 73.9197943], 16);
+
+ 
   map.data.loadGeoJson('assets/json/Test_NE_Map-_Untitled_layer.geojson');
+
+//   var geoJsonLayer = L.geoJson(featureCollection, {
+//     onEachFeature: function (feature, layer) {
+//         // Check if feature is a polygon
+//         if (feature.geometry.type === 'Polygon') {
+//             // Don't stroke and do opaque fill
+//             layer.setStyle({
+//                 'weight': 0,
+//                 'fillOpacity': 0
+//             });
+//             // Get bounds of polygon
+//             var bounds = layer.getBounds();
+//             // Get center of bounds
+//             var center = bounds.getCenter();
+//             // Use center to put marker on map
+//             var marker = L.marker(center).addTo(map);
+//         }
+//     }
+// }).addTo(map);
+
+// Create empty bounds object
+var bounds = new google.maps.LatLngBounds();
+
+// Loop through features
+map.data.addListener('addfeature', function(e) {
+  processPoints(e.feature.getGeometry(), bounds.extend, bounds);
+  map.fitBounds(bounds);
+});
+
+// zoom to the clicked feature
+map.data.addListener('click', function(e) {
+  var bounds = new google.maps.LatLngBounds();
+  processPoints(e.feature.getGeometry(), bounds.extend, bounds);
+  map.fitBounds(bounds);
+});
+
+// map.fitBounds(bounds);
 
   map.data.setStyle({
     fillColor: 'green',
@@ -82,6 +122,18 @@ function initMap(): void {
     }
   })
 
+}
+
+function processPoints(geometry, callback, thisArg) {
+  if (geometry instanceof google.maps.LatLng) {
+    callback.call(thisArg, geometry);
+  } else if (geometry instanceof google.maps.Data.Point) {
+    callback.call(thisArg, geometry.get());
+  } else {
+    geometry.getArray().forEach(function(g) {
+      processPoints(g, callback, thisArg);
+    });
+  }
 }
 
 declare global {
