@@ -22,7 +22,7 @@ function initMap(): void {
   // const map = L.map('map').setView([18.4545818, 73.9197943], 16);
 
  
-  map.data.loadGeoJson('assets/json/Test_NE_Map-_Untitled_layer.geojson');
+  map.data.loadGeoJson('assets/json/Test_NE_Map-_Untitled_layer_1.geojson');
 
 //   var geoJsonLayer = L.geoJson(featureCollection, {
 //     onEachFeature: function (feature, layer) {
@@ -58,6 +58,8 @@ map.data.addListener('click', function(e) {
   processPoints(e.feature.getGeometry(), bounds.extend, bounds);
   map.fitBounds(bounds);
 });
+
+console.log(map.data.getFeatureById(1)?.getGeometry());
 
 // map.fitBounds(bounds);
 
@@ -122,6 +124,22 @@ map.data.addListener('click', function(e) {
     }
   })
 
+  document.getElementById('over_map_bottom')?.addEventListener('click', function(event) {
+    const target = event.target as HTMLSelectElement;
+    console.log(target.innerHTML);
+    console.log(target.innerText);
+    if (document.getElementById('over_map_bottom').innerHTML == 'View Elevation') {
+      document.getElementById('map').style.display='none';
+    document.getElementById('over_map_bottom').innerHTML = 'Back To Top View';
+    document.getElementById('over_map_table').style.display='table';
+    } else {
+      document.getElementById('map').style.display='block';
+    document.getElementById('over_map_bottom').innerHTML = 'View Elevation';
+    document.getElementById('over_map_table').style.display='none';
+    }
+    
+  })
+
 }
 
 function processPoints(geometry, callback, thisArg) {
@@ -135,6 +153,8 @@ function processPoints(geometry, callback, thisArg) {
     });
   }
 }
+
+
 
 declare global {
   interface Window {
